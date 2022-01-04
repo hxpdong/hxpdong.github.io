@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body{
+    background: #969db3;
+    font-size: 14px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.bold{
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.semi_bold{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+#link_fb{
+    color: #FFFFFF;
+}
+
+.resume {
+    background:#edeeee;
+    width:595px;
+    height: 842px;
+    position:relative;
+    margin: 50px auto;
+    display: flex;
+}
+
+.resume_left{
+    background:#0f5f85;
+    width:250px;
+    height:inherit;
+    position:absolute;
+    left:0px;
+    top:0px;
+    color: #FFFFFF;
+}
+
+.resume_right{
+    background:#FFFFFF;
+    width:345px;
+    height:inherit;
+    position:absolute;
+    top:0px;
+    left:250px;
+    color:#0f5f85;
+}
+
+.resume_left .resume_profile {
+    width:100%;
+    height: auto;
+    position: absolute;
+}
+
+.resume_left .resume_profile img{
+    width:150px;
+    height:150px;
+    margin: 20px auto;
+    display:flex;
+}
+
+.resume_left .resume_content{
+    width:100%;
+    height:auto;
+    position:absolute;
+    top:200px;
+    left:10px;
+}
+
+.resume_left .resume_content .resume_info{
+    width:100%;
+    height:150px;
+    left: 10px;
+}
+
+.resume_left .resume_content .resume_skills{
+    width:100%;
+    height:150px;
+    left: 10px;
+}
+
+.resume_left .resume_content .resume_certification{
+    width:100%;
+    height:150px;
+    left: 10px;
+}
+
+.resume_right .CV {
+    width:100%;
+    height:auto;
+    position:absolute;
+    top: 50px;
+    left:10px;
+}
+
+.resume_right .CV .Education{
+    width:100%;
+    height:250px;
+}
+
+.resume_right .CV .Experience{
+    width:100%;
+    height:250px;
+}
+
+.resume_right .CV .Activities{
+    width:100%;
+    height:250px;
+}
