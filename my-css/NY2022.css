@@ -11,7 +11,7 @@
     font-size: 36px;
     font-weight: bold;
     color: white;
-    text-shadow: black 0.1em 0.1em 0.2em;
+    text-shadow: black 5px 5px 5px;
     text-align: center;
 }
 #imgcenter{
@@ -37,9 +37,9 @@
     font-size:25px;
     font-family: 'Allura';
     font-weight: bold;
-    color: white;
-    text-shadow: 0 0 0.2em red;
-    border-radius: 12px;
+    color: red;
+    text-shadow: 3px 3px 10px red;
+    border-radius:20px;
     border: 2px solid red;
-    
+    box-shadow: 3px 3px 10px red;
 }
