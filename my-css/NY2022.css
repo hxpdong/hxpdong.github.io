@@ -8,7 +8,7 @@
     display: flex;
     
     font-family: 'Allura';
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
     color: white;
     text-shadow: black 0.1em 0.1em 0.2em;
@@ -28,7 +28,7 @@
     color:yellow;
 }
 #img_baolixi{
-    
+   
 }
 
 #bt_click{
@@ -41,6 +41,5 @@
     text-shadow: 0 0 0.2em red;
     border-radius: 12px;
     border: 2px solid red;
-    
     
 }
