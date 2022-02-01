@@ -18,11 +18,14 @@
                 alert('Kính chúc:\n' + mess[a]);
             }
         </script>
+
+
     </head>
     <body background="img/NYbg.jpg">
+
         <div id="main">
             <img src="img/NYcenter.jpg" id="imgcenter" width="600">
-            <table border="0" id="tbmain" width="600" height="600">
+            <table border="0" id="tb_main" width="600">
                 <tr>
                     <td style="width:50%">
                         <div id="txt_HPNY">
@@ -31,7 +34,7 @@
                         </div>
                     </td>
                     <td>
-                        <div id="img_baolixi"><img src="img/NYbaoLixi.jpg" height="500" width="250"></div>
+                        <div id="img_baolixi"><img src="img/NYbaoLixi.jpg" height="535" width="250"></div>
                     </td>
                 </tr>
                 <tr>
@@ -40,8 +43,17 @@
                         <input type="button" id="bt_click" value="Mở" onclick="showMess()"/>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <audio controls loop id="myaudio">
+                            <source src="audio/Ngay-Xuan-Long-Phung-Sum-Vay-Various-Artists.mp3">
+                        </audio>
+                    </td>
+                </tr>
             </table>
         </div>
+        
+        
         
     </body>
 </html>
