@@ -5,7 +5,19 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="my-css/NY2022.css">
 
-        
+        <script>
+            var mess = new Array(6);
+            mess[0]="Cung chúc tân niên một chữ nhàn. Chúc mừng gia quyến đặng bình an. Tân niên đem lại niềm hạnh phúc.Xuân đến rồi hưởng trọn niềm vui.";
+            mess[1]="Năm mới mang đến hy vọng, quyết tâm, tinh thần và những mong muốn. Chúc bạn có một năm đầy hứa hẹn và trọn vẹn.";
+            mess[2]="Chúc bạn một năm mới tràn đầy niềm vui và hạnh phúc. Vui trong sức khoẻ, trẻ trong tâm hồn, khôn trong lý tưởng và trường thành mọi lĩnh vực.";
+            mess[3]="Năm mới đến. Chúc bạn luôn có quà cáp bao la, phát tài phát lộc, sum vầy hạnh phúc, cầu tài chúc phúc, an khang thịnh vượng.";
+            mess[4]="Mừng xuân 2022 phát tài phát lộc. Chúc bạn tiền vô xồng xộc, tiền ra từ từ. Sức khoẻ có dư, công danh tấn tới. Tình duyên phơi phới, hạnh phúc thăng hoa.";
+            mess[5]="Chúc bạn luôn hoan hỉ\nSức khỏe bền bỉ\nCông danh hết ý\nTiền vào bạc tỉ\nTiền ra ri rỉ\nTình yêu thỏa chí\nVạn sự như ý\nLuôn cười hí hí\nCung hỷ cung hỷ.";
+            var showMess = () => {
+                var a = Math.floor(Math.random() * 6);
+                alert(mess[a]);
+            }
+        </script>
     </head>
     <body background="img/NYbg.jpg">
         <div id="main">
@@ -27,7 +39,7 @@
 
                     </td>
                     <td>
-                        <input type="button" id="clickbt" value="Click" onclick="alert('Năm Nhâm Dần – Chúc bạn luôn:\nĐong cho đầy hạnh phúc\nGói cho trọn lộc tài\nGiữ cho mãi an khang\nThắt cho chặt phú quý.')"/>
+                        <input type="button" id="clickbt" value="Click" onclick="showMess()"/>
                     </td>
                 </tr>
             </table>
