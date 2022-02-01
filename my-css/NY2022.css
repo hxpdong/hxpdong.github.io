@@ -1,0 +1,40 @@
+#main{
+    background-color: aliceblue;
+    width:600px;
+    height: auto;
+    position:relative;
+    margin: 50px auto;
+    display: flex;
+    
+    font-family: 'Courier New';
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+#imgcenter{
+    z-index: 1;
+    position: absolute;
+}
+#tbmain{
+    z-index: 2;
+    position: absolute;
+}
+
+#txtHPNY{
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+#imgbaolixi{
+    
+}
+
+#clickbt{
+    background-color: yellow;
+    padding: 10px 32px;
+    font-size:30px;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    border-radius: 12px;
+    border: 2px solid red;
+    
+}
