@@ -80,8 +80,8 @@ const isFullBoard =(grid) =>{
     return grid.every((row,i)=>{
         return row.every((value,j)=>{
             return value !== CONSTANT.UNASSIGNED;
-        })
-    })
+        });
+    });
 }
 const sudokuCreate = (grid) => {
     let unassigned_pos = {
@@ -204,7 +204,7 @@ const initSudoku = ()=>{
     removeErr();
     su = sudokuGen(level);
     su_answer = [...su.question];
-
+    
     console.table(su_answer);
 
     for (let i=0;i<Math.pow(CONSTANT.GRID_SIZE,2);i++){
@@ -280,7 +280,7 @@ const checkErr = (value) =>{
     for(let i=0;i<CONSTANT.BOX_SIZE;i++){
         for(let j=0;j<CONSTANT.BOX_SIZE;j++){
             let cell = cells[9*(box_start_row+i) + (box_start_col +j)];
-            if (cell.classList.contains('selected')) addErr(cell);
+            if (!cell.classList.contains('selected')) addErr(cell);
         }
     }
     let step = 9;
@@ -425,7 +425,7 @@ document.querySelector('#btn-delete').addEventListener('click',()=>{
 })
 
 const init = ()=>{
-    const game = getGameInfo();
+    //const game = getGameInfo();
 
     initGameBoard();
     initCellsEvent();

@@ -152,7 +152,8 @@ ul{
     height:var(--sudoku-cell-size);
     width:var(--sudoku-cell-size);
     border-radius: var(--border-radius);
-    background-color: var(--bg-main);
+    /*background-color: var(--bg-main);*/
+    background-color: lightgrey;
     color:var(--blue);
     display:grid;
     place-items: center;
