@@ -1,0 +1,86 @@
+*{
+    
+    -webkit-tap-highlight-color: transparent;
+}
+body{
+    height:auto;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow-x:hidden;
+    user-select:none;
+}
+
+#header {
+    background-color:#0489B1;
+    color: white;
+    top:0;
+    width:auto;
+    height:80px;
+    z-index:100;
+    margin: auto;
+    align-items: center;
+    text-align: left;
+    /*justify-content: space-between;*/
+    padding:10px;
+    
+}
+#title{
+    font-size:45px;
+}
+#author{
+    padding-top:15px;
+}
+#main{
+    height:600px;
+    display:grid;
+    place-items: center;
+    
+}
+#screen{
+    position: relative;
+    overflow:hidden;
+    height:100%;
+    min-width: 500px;
+}
+.start-screen{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.start-screen.active{
+    transform:translateX(0)
+}
+.btn {
+    height:80px;
+    width:280px;
+    background-color: rgb(101, 116, 129);
+    color: white;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    transition:width 0.3s ease-in-out;
+    overflow:hidden;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+#btn-level{
+    background-color: rgb(116, 214, 116);
+    color:white;
+}
+#btn-play {
+    background-color: rgb(106, 224, 100);
+    border: solid green 5px;
+}
+#btn-solve{
+    background-color: rgb(85, 199, 236);
+    border: solid blue 5px;
+}
