@@ -1,44 +1,25 @@
-*{
-    
-    -webkit-tap-highlight-color: transparent;
-}
 body{
     height:auto;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    overflow-x:hidden;
     user-select:none;
 }
-
-#header {
-    background-color:#0489B1;
-    color: white;
-    top:0;
-    width:auto;
-    height:80px;
-    z-index:100;
-    margin: auto;
-    align-items: center;
-    text-align: left;
-    /*justify-content: space-between;*/
-    padding:10px;
-    
+.header{
+    height:auto;
+    background-color: rgb(0, 102, 128);
+    color:white;
+    padding:5px;
 }
-#title{
-    font-size:45px;
-}
-#author{
-    padding-top:15px;
-}
-#main{
-    height:600px;
+.main{
+    /*padding-top:70px;*/
+    height:auto;
     display:grid;
-    place-items: center;
-    
+    place-items:center;
+
 }
-#screen{
+.screen {
     position: relative;
-    overflow:hidden;
-    height:100%;
+    overflow: hidden;
+    height:auto;
     min-width: 500px;
 }
 .start-screen{
@@ -58,29 +39,115 @@ body{
     transform:translateX(0)
 }
 .btn {
-    height:80px;
-    width:280px;
-    background-color: rgb(101, 116, 129);
-    color: white;
-    border-radius:10px;
+    font-size: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin:10px;
+    padding:20px;
+    width:230px;
+    cursor: pointer;
     display:grid;
     place-items:center;
-    transition:width 0.3s ease-in-out;
-    overflow:hidden;
-    font-size: 35px;
     font-weight: bold;
+}
+#btn-choose-level{
+    color:green
+}
+#btn-start-game{
+    color:rgb(6, 255, 6)
+}
+#btn-solve-sudoku{
+    color:blue
+}
+.game-screen{
+    display:flex;
+    height:100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+.game-screen.active{
+    transform: translateX(0);
+}
+.game-info{
+    font-size:25px;
+    margin:2px;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    align-items: center;
+}
+.info-area{
+    float:left;
+}
+.button-area {
+    float: right;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+}
+.button-area .btn {
+    height:auto;
+    font-size: 20px;
+    width:auto;
+    padding:5px;
+    margin:5px;
+}
+.sudoku-board{
+    display:grid;
+    gap:2px;
+    grid-template-columns: repeat(9,auto);
+    
+}
+.sudoku-cell{
+    height:45px;
+    width:45px;
+    border:3px solid black;
+    display:grid;
+    background-color: white;
+    color:blue;
+    place-items: center;
+    font-size: 32px;
+    cursor:pointer;
+}
+.sudoku-cell.filled {
+    background-color: lightgrey;
+    color:black;
+}
+.sudoku-cell.selected {
+    background-color: lightblue;
+    color: white;
+}
+.sudoku-cell.hover{
+    border-color: blue;
+}
+.numbers{
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    gap: 5px;
+    margin-top:10px;
+    place-items: center;
+}
+.number {
+    border: 2px solid black;
+    height:auto;
+    width:50px;
+    display: grid;
+    place-items: center;
+    font-size:25px;
     cursor: pointer;
-    margin-top: 20px;
+    border-radius: 10px;
+    padding:3px;
 }
-#btn-level{
-    background-color: rgb(116, 214, 116);
-    color:white;
-}
-#btn-play {
-    background-color: rgb(106, 224, 100);
-    border: solid green 5px;
-}
-#btn-solve{
-    background-color: rgb(85, 199, 236);
-    border: solid blue 5px;
+.delete{
+    border: 2px solid black;
+    height:auto;
+    width:50px;
+    display: grid;
+    place-items: center;
+    font-size:25px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding:3px;
+    color:red;
 }

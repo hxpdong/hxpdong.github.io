@@ -4,28 +4,134 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku Game_B1910628</title>
+    <title>Sudoku Demo</title>
     <link rel="stylesheet" href="sudoku.css">
 </head>
 <body>
-    <div id="container">
+    <div class="header">
+        <h2>Sudoku Demo</h2>
+        By B1910628 _ Ho Xuan Phuong Dong
+    </div>
 
-        <div id="header">
-            <div id="title">Sudoku Game Demo</div>
-            <div id="author"><span>By B1910628_Ho Xuan Phuong Dong</span></div>
-        </div>
+    <div class="main">
+        <div class="screen">
+            <div class="start-screen active" id="start-screen">
+                <div>Choose Level:</div>
+                <div class="btn" id="btn-choose-level">Easy</div>
+                <div class="btn" id="btn-start-game">Start Game</div>
+                <div class="btn" id="btn-solve-sudoku">Solve Sudoku</div>
+            </div>
+            
+            <div class="game-screen" id="game-screen">
+                <div class="game-info">
+                    <span class="info-area">
+                        Level: <span id="game-level"></span>
+                    </span>
+                    <span class="button-area">
+                        <span class="btn" id="btn-submit">Submit</span> <span class="btn" id="btn-new-game">New Game</span>
+                    </span>
+                </div>
 
-        <div id="main">
-            <div id="screen">
-                <div class="start-screen active" id="start-screen">
-                    <div class="btn" id="btn-level">Easy</div>
-                    <div class="btn" id="btn-play">Play Game</div>
-                    <div class="btn" id="btn-solve">Solve Sudoku</div>
+                <div class="sudoku-board">
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                    <div class="sudoku-cell"></div>
+                </div>
+
+                <div class="numbers">
+                    <div class="number">1</div>
+                    <div class="number">2</div>
+                    <div class="number">3</div>
+                    <div class="number">4</div>
+                    <div class="number">5</div>
+                    <div class="number">6</div>
+                    <div class="number">7</div>
+                    <div class="number">8</div>
+                    <div class="number">9</div>
+                    <div class="delete" id="btn-delete">X</div>
                 </div>
             </div>
+            
         </div>
-
     </div>
-    
+    <script src="sudoku.js"></script>
 </body>
 </html>
