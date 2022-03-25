@@ -115,7 +115,7 @@ body{
     color:black;
 }
 .sudoku-cell.selected {
-    background-color: lightblue;
+    background-color: rgb(134, 203, 212);
     color: white;
 }
 .sudoku-cell.hover{
@@ -131,7 +131,7 @@ body{
 .number {
     border: 2px solid black;
     height:auto;
-    width:50px;
+    width:60px;
     display: grid;
     place-items: center;
     font-size:25px;
@@ -142,7 +142,7 @@ body{
 .delete{
     border: 2px solid black;
     height:auto;
-    width:50px;
+    width:60px;
     display: grid;
     place-items: center;
     font-size:25px;
