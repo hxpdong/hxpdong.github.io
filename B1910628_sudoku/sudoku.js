@@ -84,33 +84,6 @@ const isFullBoard =(board) =>{
     }
     return true;
 }
-/*
-const sudokuCheck = (grid) => {
-    let unassigned_pos = {
-        row: -1,
-        col: -1
-    }
-
-    if (!findUnassignedPos(grid, unassigned_pos)) return true;
-
-    grid.forEach((row, i) => {
-        row.forEach((num, j) => {
-            if (isSafe(grid, i, j, num)) {
-                if (isFullBoard(grid)) {
-                    return true;
-                } else {
-                    if (sudokuCreate(grid)) {
-                        return true;
-                    }
-                }
-            }
-        })
-    })
-
-    return isFullBoard(grid);
-}
-
-*/
 
 const sudokuCreateBoard = (board)=>{
     let null_pos = {
@@ -139,6 +112,31 @@ const sudokuCreateBoard = (board)=>{
     });
     return isFullBoard(board);
 }
+
+const sudokuCheck = (quest) => {
+    let null_pos = {
+        row: -1,
+        col: -1
+    }
+    if (!findNull(quest, null_pos)) return true;
+    
+    quest.forEach((row, i) => {
+        row.forEach((num, j) => {
+            if (isSafe(quest, i, j, num)) {
+                if (isFullBoard(quest)) {
+                    return true;
+                } else {
+                    if (sudokuCreateBoard(quest)) {
+                        return true;
+                    }
+                }
+            }
+        })
+    })
+
+    return isFullBoard(quest);
+}
+
 
 const rand =()=>Math.floor(Math.random()*9);
 
@@ -179,8 +177,21 @@ let su_quest = undefined;
 let su_answer = undefined;
 let selected_cell = -1;
 
+
+const resetSudoku =()=>{
+    for(let i=0;i<81 ;i++){
+        cells[i].innerHTML ='';
+        cells[i].classList.remove('filled');
+        cells[i].classList.remove('selected');
+    }
+}
 //Init board into screen
 const initSudoku = ()=>{
+    //clear old sudoku
+    resetSudoku();
+    resetErrorValue();
+    resetHoverBg();
+    resetError();
     let board = newBoard();
     let quest = newBoard();
     sudokuCreateBoard(board);
@@ -251,7 +262,7 @@ const cellHoverBg = (index) =>{
     }
 }
 
-const cellResetBg =()=>{
+const resetHoverBg =()=>{
     cells.forEach(e => e.classList.remove('hover'));
 }
 
@@ -263,14 +274,102 @@ const initCellsEvent = () =>{
             if(!e.classList.contains('filled')){
                 cells.forEach(e=>e.classList.remove('selected'));
                 selected_cell = index;
-                //e.classList.remove('err');
+                e.classList.remove('err');
                 e.classList.add('selected');
-                cellResetBg();
+                resetHoverBg();
                 cellHoverBg(index);
             }
         })
     })
 }
+const cellCheckError = (value) =>{
+    const addErrValue = (cell) =>{
+        cell.classList.add('errValue');
+    }
+    const addError = (cell) =>{
+        if(parseInt(cell.getAttribute('data-value')) === value){
+            cell.classList.add('err');
+            addErrValue(cells[selected_cell]);
+        }
+    }
+    let index = selected_cell;
+    let row=Math.floor(index/9);
+    let col=index%9;
+    let box_start_row = row - row%3;
+    let box_start_col = col - col%3;
+
+   
+    for(let i=0;i<3;i++){
+        for(let j=0;j<3;j++){
+            let cell = cells[9*(box_start_row+i) + (box_start_col +j)];
+            if(!cell.classList.contains('selected'))
+                addError(cell);
+           
+        }
+    }
+    //check above cells
+    let step = 9;
+    while (index - step >=0) {
+        addError(cells[index - step]);
+        step += 9;
+    }
+   //check below cells
+    step = 9;
+    while (index + step < 81) {
+        addError(cells[index + step]);
+        step += 9;
+    }
+    //check left cells
+    step =1;
+    while (index - step >=9*row) {
+        addError(cells[index - step]);
+        step += 1;
+    }
+    //check right cells
+    step =1;
+    while (index + step < 9*row + 9) {
+        addError(cells[index + step]);
+        step += 1;
+    }
+}
+const resetError = () => {
+    cells.forEach(e => e.classList.remove('err'));
+}
+const resetErrorValue = () =>{
+    cells.forEach(e => e.classList.remove('errValue'));
+}
+const clearErrorValue = (cell) =>{
+    cell.classList.remove('errValue');
+}
+const isGameWin = ()=> sudokuCheck(su_quest);
+
+const initNumberInputEvent = () =>{
+    number_inputs.forEach((e,num)=>{
+        e.addEventListener('click',()=>{
+            if(cells[selected_cell].classList.contains('errValue')){
+                clearErrorValue(cells[selected_cell]);
+            }
+            if(!cells[selected_cell].classList.contains('filled')){
+                cells[selected_cell].innerHTML = num + 1;
+                cells[selected_cell].setAttribute('data-value',num+1);
+                let row = Math.floor(selected_cell/9);
+                let col = selected_cell%9;
+                su_quest[row][col] = num +1;
+                resetError();
+                cellCheckError(num+1);
+            }
+        })
+    })
+}
+//button delete value
+document.querySelector('#btn-delete').addEventListener('click',()=>{
+    cells[selected_cell].innerHTML ="";
+    cells[selected_cell].setAttribute('data-value',0);
+    let row = Math.floor(selected_cell/9);
+    let col = selected_cell%9;
+    su_quest[row][col] = 0;
+    cellClearError();
+})
 //button choose level
 document.querySelector('#btn-choose-level').addEventListener('click', (e) => {
     level_index = level_index + 1 > CONSTANT.LEVEL.length - 1 ? 0 : level_index + 1;
@@ -289,6 +388,25 @@ document.querySelector('#btn-start-game').addEventListener('click',()=>{
     initSudoku();
     startGame();
 });
+//button submit
+document.querySelector('#btn-submit').addEventListener('click', ()=>{
+    if(isGameWin()){
+        alert("You win!");
+    }
+    else
+        alert("The quest is not solved!");
+})
+const returnStartScreen =()=>{
+    //pause = false;
+    start_screen.classList.add('active');
+    game_screen.classList.remove('active');
+    /*pause_screen.classList.remove('active');
+    result_screen.classList.remove('active');*/
+}
+//button new game
+document.querySelector("#btn-new-game").addEventListener('click', ()=>{
+    returnStartScreen();
+})
 const initGameBoard = () =>{
     let index =0;
     for (let i=0;i<9;i++){
@@ -304,5 +422,6 @@ const init = () =>{
     
     initGameBoard();
     initCellsEvent();
+    initNumberInputEvent();
 }
 init();

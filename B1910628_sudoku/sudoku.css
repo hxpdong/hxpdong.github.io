@@ -116,10 +116,16 @@ body{
 }
 .sudoku-cell.selected {
     background-color: rgb(134, 203, 212);
-    color: white;
 }
 .sudoku-cell.hover{
     border-color: blue;
+}
+.sudoku-cell.err {
+    background-color: rgb(219, 108, 108);
+    color: white;
+}
+.sudoku-cell.errValue{
+    color:red
 }
 .numbers{
     display: grid;
