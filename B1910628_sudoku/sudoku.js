@@ -186,8 +186,8 @@ const solveSudoku = (board) =>{
 }
 
 
-/////////////////////////////////////////////////////////////////
-////Start screen
+/////////////////////////////////////////////////////////////////////////////
+////////////////////// Start screen //////////////////////
 const start_screen = document.querySelector('#start-screen');
 let level_index = 0;
 let level = CONSTANT.LEVEL[level_index];
@@ -222,7 +222,7 @@ document.querySelector('#btn-solve-sudoku').addEventListener('click',()=>{
 
 
 
-////Game screen
+////////////////////// Game screen //////////////////////
 const game_screen = document.querySelector('#game-screen');
 const game_level = document.querySelector('#game-level');
 const cells = document.querySelectorAll('.sudoku-cell');
@@ -478,6 +478,16 @@ const clearErrorValue = (cell) =>{
 const initNumberInputEvent = () =>{
     number_inputs.forEach((e,num)=>{
         e.addEventListener('click',()=>{
+            for(let i=0;i<81;i++) {
+                if(cells[i].classList.contains('errValue')){
+                    cells[i].innerHTML ="";
+                    cells[i].setAttribute('data-value',0);
+                    let row = Math.floor(i/9);
+                    let col = i%9;
+                    su_quest[row][col] = 0;
+                    cells[i].classList.remove('errValue');
+                }
+            };
             if(cells[selected_cell].classList.contains('errValue')){
                 clearErrorValue(cells[selected_cell]);
             }
@@ -504,7 +514,7 @@ document.querySelector('#btn-delete').addEventListener('click',()=>{
 
 
 
-///Solve screen
+////////////////////// Solve screen //////////////////////
 const solve_screen = document.querySelector('#solve-screen');
 const cellsSolve = document.querySelectorAll('.sudoku-cell-solve');
 const number_inputsSolve = document.querySelectorAll('.number-solve');
@@ -522,7 +532,7 @@ document.querySelector('#btn-home').addEventListener('click',()=>{
         cellsSolve[i].classList.remove('selected');
         cellsSolve[i].innerHTML="";
     }
-
+    resetErrorSolve();
 })
 //button clear all
 document.querySelector('#btn-clear-solve').addEventListener('click',()=>{
@@ -622,9 +632,21 @@ const cellCheckErrorSolve = (value) =>{
 const initNumberInputEventSolve = () =>{
     number_inputsSolve.forEach((e,num)=>{
         e.addEventListener('click',()=>{
+            for(let i=0;i<81;i++) {
+                if(cellsSolve[i].classList.contains('errValue')){
+                    cellsSolve[i].innerHTML ="";
+                    cellsSolve[i].setAttribute('data-value',0);
+                    let row = Math.floor(i/9);
+                    let col = i%9;
+                    su_solve[row][col] = 0;
+                    cellsSolve[i].classList.remove('filled');
+                    cellsSolve[i].classList.remove('errValue');
+                }
+            };
             if(cellsSolve[selected_cell].classList.contains('errValue')){
                 clearErrorValue(cellsSolve[selected_cell]);
             }
+
             cellsSolve[selected_cell].innerHTML = num + 1;
             cellsSolve[selected_cell].setAttribute('data-value',num+1);
             cellsSolve[selected_cell].classList.add('filled');
@@ -644,9 +666,22 @@ document.querySelector('#btn-delete-solve').addEventListener('click',()=>{
     let row = Math.floor(selected_cell/9);
     let col = selected_cell%9;
     su_solve[row][col] = 0;
+    resetErrorSolve();
 })
 //button solve board
 const solveSudokuBoard = () =>{
+    resetErrorSolve();
+    for(let i=0;i<81;i++) {
+        if(cellsSolve[i].classList.contains('errValue')){
+            cellsSolve[i].innerHTML ="";
+            cellsSolve[i].setAttribute('data-value',0);
+            let row = Math.floor(i/9);
+            let col = i%9;
+            su_solve[row][col] = 0;
+            cellsSolve[i].classList.remove('filled');
+            cellsSolve[i].classList.remove('errValue');
+        }
+    };
     solveSudoku(su_solve);
     for(let i=0;i<81;i++){
         let row = Math.floor(i/9);
