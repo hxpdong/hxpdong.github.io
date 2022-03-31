@@ -324,6 +324,7 @@ const clearNotFill =()=>{
             let col = i%9;
             su_quest[row][col] = 0;
             cells[i].classList.remove('selected');
+            cells[i].setAttribute('data-value',0);
         }
     }
 }
