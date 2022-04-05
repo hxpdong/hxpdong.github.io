@@ -145,11 +145,11 @@ const sudokuCheck = (quest) => {
             if (isSafe(quest, i, j, num)) {
                 if (isFullBoard(quest)) {
                     return true;
-                } else {
+                } /*else {
                     if (sudokuCreateBoard(quest)) {
                         return true;
                     }
-                }
+                }*/
             }
         })
     })
@@ -187,6 +187,11 @@ const solveSudoku = (board) =>{
 
 
 /////////////////////////////////////////////////////////////////////////////
+/*
+.innerHTML =""; //set number showed on the screen
+.setAttribute('data-value',0);  //set attribute value of cells
+su_[row][col] = 0; //set value in array of board
+*/
 ////////////////////// Start screen //////////////////////
 const start_screen = document.querySelector('#start-screen');
 let level_index = 0;
