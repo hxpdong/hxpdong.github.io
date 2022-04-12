@@ -236,6 +236,7 @@ let su_quest = undefined;
 let su_answer = undefined;
 let selected_cell = -1;
 
+const result_screen = document.querySelector('#result-screen');
 //init box
 const initGameBoard = () =>{
     let index =0;
@@ -299,13 +300,27 @@ const initSudoku = ()=>{
 //button submit
 const isGameWin = ()=> sudokuCheck(su_quest);
 document.querySelector('#btn-submit').addEventListener('click', ()=>{
+    document.getElementById("txt-notification").classList.remove('Solved');
+    document.getElementById("txt-notification").classList.remove('notSolved');
     if(isGameWin()){
-        alert("You win!");
+        //alert("You win!");
+        result_screen.classList.add('active');
+        document.getElementById("txt-notification").classList.add('Solved');
+        document.getElementById("txt-notification").innerHTML = "You Win!";
     }
     else
-        alert("The quest is not solved!");
-})
+        //alert("The quest is not solved!");
+        {
+            result_screen.classList.add('active');
+            document.getElementById("txt-notification").classList.add('notSolved');
+            document.getElementById("txt-notification").innerHTML = "The quest is not solved!";
+        }
 
+})
+//button close notification
+closeNotification = () =>{
+    result_screen.classList.remove('active');
+}
 //button new game
 const returnStartScreen =()=>{
     //pause = false;
@@ -321,6 +336,8 @@ document.querySelector("#btn-new-game").addEventListener('click', ()=>{
 
 //button clear all value
 const clearNotFill =()=>{
+    document.getElementById("txt-notification").classList.remove('Solved');
+    document.getElementById("txt-notification").classList.remove('notSolved');
     for(let i=0;i<81 ;i++){
         
         if(!cells[i].classList.contains('filled')){

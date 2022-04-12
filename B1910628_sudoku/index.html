@@ -5,14 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku Demo</title>
-    <link rel="stylesheet" href="sudoku.css">
+    <link rel="stylesheet" href="sudoku2.css">
 </head>
 <body>
+    <!--
     <div class="header">
         <h2>Sudoku Demo</h2>
         By B1910628 _ Ho Xuan Phuong Dong
     </div>
 
+    -->
     <div class="main">
         <div class="screen">
             <div class="start-screen active" id="start-screen">
@@ -239,6 +241,13 @@
                     <div class="number-solve">8</div>
                     <div class="number-solve">9</div>
                     <div class="delete-solve" id="btn-delete-solve">X</div>
+                </div>
+            </div>
+
+            <div class="result-screen" id="result-screen">
+                <div id="notification">
+                    <div id="txt-notification">abc</div>
+                    <input type="button" value="OK" id="btn-close-notification" onclick="closeNotification();">
                 </div>
             </div>
         </div>
