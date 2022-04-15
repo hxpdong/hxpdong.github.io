@@ -282,10 +282,10 @@ const initSudoku = ()=>{
     sudokuCreateQuest(board,level,quest);
     su_quest = quest;
     su_answer = board;
-
+/*
     console.table(su_quest);
     console.table(su_answer);
-
+*/
     for (let i=0;i<81;i++){
         let row = Math.floor(i/9);
         let col = i%9;
@@ -387,52 +387,52 @@ const cellHoverBg = (index) =>{
     let box_start_row = row - row%3;
     let box_start_col = col - col%3;
     //hover 3x3 cells
-    console.log("index box: ");
+    //console.log("index box: ");
     for(let i=0;i<3;i++){
         for(let j=0;j<3;j++){
             let cell = cells[9*(box_start_row+i) + (box_start_col +j)];
             cell.classList.add('hover');
-            console.log(9*(box_start_row+i) + (box_start_col +j));
+            //console.log(9*(box_start_row+i) + (box_start_col +j));
         }
     }
     //hover above cells (column)
     let step = 9;
-    console.log("index above index: ");
+    //console.log("index above index: ");
     while (index - step >=0) {
         cells[index - step].classList.add('hover');
-        console.log(index - step);
+        //console.log(index - step);
         step += 9;
     }
     //hover below cells (column)
     step = 9;
-    console.log("index below index: ");
+    //console.log("index below index: ");
     while (index + step < 81) {
         cells[index + step].classList.add('hover');
-        console.log(index + step);
+        //console.log(index + step);
         step += 9;
     }
     //hover left cells (row)
     step =1;
-    console.log("index left index: ");
+    //console.log("index left index: ");
     while (index - step >=9*row) {
         cells[index - step].classList.add('hover');
-        console.log(index - step);
+        //console.log(index - step);
         step += 1;
     }
     //hover right cells (row)
     step =1;
-    console.log("index right index: ");
+    //console.log("index right index: ");
     while (index + step < 9*row + 9) {
         cells[index + step].classList.add('hover');
-        console.log(index + step);
+        //console.log(index + step);
         step += 1;
     }
 }
 const initCellsEvent = () =>{
     cells.forEach((e,index) => {
         e.addEventListener('click',()=>{
-            console.log("selected index:");
-            console.log(index);
+            /*console.log("selected index:");
+            console.log(index);*/
             if(!e.classList.contains('filled')){
                 cells.forEach(e=>e.classList.remove('selected'));
                 selected_cell = index;
