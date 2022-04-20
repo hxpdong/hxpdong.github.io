@@ -5,7 +5,7 @@ const CONSTANT = {
         'Medium',
         'Hard'
     ],
-    LEVEL:[29,38,47]
+    LEVEL:[25,35,45]
 };
 //Make null board
 const newBoard = () =>{
