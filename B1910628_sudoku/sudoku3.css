@@ -1,0 +1,233 @@
+body{
+    height:auto;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    user-select:none;
+}
+.header{
+    height:auto;
+    background-color: rgb(0, 102, 128);
+    color:white;
+    padding:5px;
+}
+.main{
+    height:auto;
+    display:grid;
+    place-items:center;
+
+}
+.screen {
+    position: relative;
+    overflow: hidden;
+    height:auto;
+    min-width: 485px;
+    min-height: 700px;
+}
+.start-screen{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index:1;
+}
+.start-screen.active{
+    z-index:2;
+}
+.btn {
+    font-size: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin:10px;
+    padding:20px;
+    width:230px;
+    cursor: pointer;
+    display:grid;
+    place-items:center;
+    font-weight: bold;
+}
+#btn-choose-level{
+    color:green
+}
+#btn-start-game{
+    color:rgb(6, 255, 6)
+}
+#btn-solve-sudoku{
+    color:blue
+}
+.game-screen{
+    position: absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+    background-color: white;
+    z-index:1;
+}
+.game-screen.active{
+    z-index:2;
+}
+.game-info{
+    font-size:25px;
+    margin:2px;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    align-items: center;
+}
+.info-area{
+    float:left;
+}
+.button-area {
+    float: right;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+}
+.button-area .btn , .button-area-solve .btn{
+    height:auto;
+    font-size: 20px;
+    width:auto;
+    padding:3px;
+    margin:3px;
+}
+.sudoku-board, .sudoku-board-solve{
+    display:grid;
+    gap:2px;
+    grid-template-columns: repeat(9,auto);
+    
+}
+.sudoku-cell, .sudoku-cell-solve{
+    height:45px;
+    width:45px;
+    border:3px solid black;
+    display:grid;
+    background-color: white;
+    color:blue;
+    place-items: center;
+    font-size: 32px;
+    cursor:pointer;
+}
+.sudoku-cell.filled,.sudoku-cell-solve.filled {
+    background-color: lightgrey;
+    color:black;
+}
+.sudoku-cell.selected,.sudoku-cell-solve.selected {
+    background-color: rgb(134, 203, 212);
+}
+.sudoku-cell.hover{
+    border-color: blue;
+}
+.sudoku-cell.err,.sudoku-cell-solve.err {
+    background-color: rgb(219, 108, 108);
+    color: white;
+}
+.sudoku-cell.errValue,.sudoku-cell-solve.errValue{
+    color:red
+}
+.numbers{
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    gap: 5px;
+    margin-top:10px;
+    place-items: center;
+}
+.number,.number-solve {
+    border: 2px solid black;
+    height:auto;
+    width:60px;
+    display: grid;
+    place-items: center;
+    font-size:25px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding:3px;
+}
+.delete,.delete-solve{
+    border: 2px solid black;
+    height:auto;
+    width:60px;
+    display: grid;
+    place-items: center;
+    font-size:25px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding:3px;
+    color:red;
+}
+
+.solve-screen {
+    position: absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+    background-color: white;
+    z-index:1;
+}
+.solve-screen.active{
+    z-index:2;
+}
+.game-info-solve{
+    font-size:25px;
+    margin:2px;
+    display: grid;
+    
+    align-items: center;
+}
+.button-area-solve .left{
+    display:flex;
+    float:left;
+}
+.button-area-solve .right{
+    display:flex;
+    float:right;
+}
+.result-screen {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+    
+}
+.result-screen.active{
+    z-index:2;
+}
+#notification {
+    width:400px;
+    height:220px;
+    border:solid black 3px;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+#txt-notification{
+    font-size: 32px;
+}
+#txt-notification.notSolved {
+    color: red;
+}
+#txt-notification.Solved {
+    color: green;
+}
+#btn-close-notification {
+    margin-top: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+
+}
