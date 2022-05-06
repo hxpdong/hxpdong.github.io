@@ -223,6 +223,15 @@ document.querySelector('#btn-solve-sudoku').addEventListener('click',()=>{
     solveScreen();
     let board = newBoard();
     su_solve = board;
+    for (let i=0;i<81;i++){
+        let row = Math.floor(i/9);
+        let col = i%9;
+        cellsSolve[i].setAttribute('data-value',su_solve[row][col]);
+        cellsSolve[i].classList.remove('filled');
+        cellsSolve[i].classList.remove('selected');
+        cellsSolve[i].innerHTML="";
+    }
+    resetErrorSolve();
 })
 
 
@@ -730,3 +739,65 @@ const init = () =>{
     initNumberInputEventSolve();
 }
 init();
+
+let numInput;
+const initNumberEvent = () =>{
+    numInput = 0;
+    if(navigator.appName=='Netscape'){
+        if (event.which >= 49 && event.which <= 57)
+            numInput = parseInt(String.fromCharCode(event.which));
+        else if (event.which == 120 || event.which == 88)
+            numInput = "";
+    }
+    else
+        if (event.keyCode >= 49 && event.keyCode <= 57)
+            numInput = parseInt(String.fromCharCode(event.keyCode));
+        else if (event.keyCode == 120 || event.keyCode == 88)
+            numInput = "";
+    if (numInput !== 0){
+        for(let i=0;i<81;i++) {
+            if(cells[i].classList.contains('errValue')){
+                cells[i].innerHTML ="";
+                cells[i].setAttribute('data-value',0);
+                let row = Math.floor(i/9);
+                let col = i%9;
+                su_quest[row][col] = 0;
+                cells[i].classList.remove('errValue');
+            }
+            if(cellsSolve[i].classList.contains('errValue')){
+                cellsSolve[i].innerHTML ="";
+                cellsSolve[i].setAttribute('data-value',0);
+                let row = Math.floor(i/9);
+                let col = i%9;
+                su_solve[row][col] = 0;
+                cellsSolve[i].classList.remove('filled');
+                cellsSolve[i].classList.remove('errValue');
+            }
+        }
+    
+        if(cells[selected_cell].classList.contains('errValue')){
+            clearErrorValue(cells[selected_cell]);
+        }
+        if(cellsSolve[selected_cell].classList.contains('errValue')){
+            clearErrorValue(cellsSolve[selected_cell]);
+        }
+    
+        if(!cells[selected_cell].classList.contains('filled')){
+            cells[selected_cell].innerHTML = numInput;
+            cells[selected_cell].setAttribute('data-value',numInput);
+            let row = Math.floor(selected_cell/9);
+            let col = selected_cell%9;
+            su_quest[row][col] = numInput;
+            resetError();
+            cellCheckError(numInput);
+        }
+        cellsSolve[selected_cell].innerHTML = numInput;
+        cellsSolve[selected_cell].setAttribute('data-value',numInput);
+        cellsSolve[selected_cell].classList.add('filled');
+        let row = Math.floor(selected_cell/9);
+        let col = selected_cell%9;
+        su_solve[row][col] = numInput;
+        resetErrorSolve();
+        cellCheckErrorSolve(numInput);
+    }
+}
