@@ -213,6 +213,7 @@ const startGame =()=>{
 document.querySelector('#btn-start-game').addEventListener('click',()=>{
     initSudoku();
     startGame();
+    numInput = 0;
 });
 //button solve sudoku
 const solveScreen = () =>{
@@ -232,6 +233,7 @@ document.querySelector('#btn-solve-sudoku').addEventListener('click',()=>{
         cellsSolve[i].innerHTML="";
     }
     resetErrorSolve();
+    numInput = 0;
 })
 
 
