@@ -556,15 +556,18 @@ let su_solve = undefined;
 document.querySelector('#btn-home').addEventListener('click',()=>{
     returnStartScreen();
     su_solve = newBoard();
-    for (let i=0;i<81;i++){
+    for(let i=0;i<81;i++){
         let row = Math.floor(i/9);
         let col = i%9;
         cellsSolve[i].setAttribute('data-value',su_solve[row][col]);
         cellsSolve[i].classList.remove('filled');
         cellsSolve[i].classList.remove('selected');
+        cellsSolve[i].classList.remove('err');
+        cellsSolve[i].classList.remove('errValue');
         cellsSolve[i].innerHTML="";
     }
     resetErrorSolve();
+    resetErrorValueSolve();
 })
 //button clear all
 document.querySelector('#btn-clear-solve').addEventListener('click',()=>{
