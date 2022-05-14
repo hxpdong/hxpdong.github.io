@@ -790,6 +790,11 @@ const initNumberEvent = () =>{
                     su_quest[row][col] = numInput;
                     resetErrored();
                     cellCheckError(numInput);
+                    if(numInput ==""){
+                        cells[selected_cell].innerHTML ="";
+                        cells[selected_cell].setAttribute('data-value',0);
+                        su_quest[row][col] = 0;
+                    }
                 }
             }
 
@@ -814,6 +819,12 @@ const initNumberEvent = () =>{
                 su_solve[row][col] = numInput;
                 resetErroredSolve();
                 cellCheckErrorSolve(numInput);
+                if(numInput ==""){
+                    cellsSolve[selected_cell].innerHTML ="";
+                    cellsSolve[selected_cell].setAttribute('data-value',0);
+                    cellsSolve[selected_cell].classList.remove('filled');
+                    su_solve[row][col] = 0;
+                }
             }
         }
     }
