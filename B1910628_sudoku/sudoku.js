@@ -95,21 +95,18 @@ const sudokuCreateBoard = (board)=>{
     let row = null_pos.row;
     let col = null_pos.col;
 
-    number_list.forEach((num, i) => {
-        if (isSafe(board, row, col, num)) {
-            board[row][col] = num;
-
-            if (isFullBoard(board)) {
+    for(let i=0;i<9;i++){
+        if(isSafe(board,row,col,number_list[i])){
+            board[row][col] = number_list[i];
+            if(isFullBoard(board)){
                 return true;
-            } else {
-                if (sudokuCreateBoard(board)) {
+            }else{
+                if(sudokuCreateBoard(board)){
                     return true;
-                } else board[row][col] = 0;
+                }else board[row][col] = 0;
             }
-
-            
         }
-    });
+    }
     return isFullBoard(board);
 }
 
@@ -139,21 +136,16 @@ const sudokuCheck = (quest) => {
         col: -1
     }
     if (!findNull(quest, null_pos)) return true;
-    
-    quest.forEach((row, i) => {
-        row.forEach((num, j) => {
-            if (isSafe(quest, i, j, num)) {
-                if (isFullBoard(quest)) {
+    /*
+    for (let i=0;i<81;i++){
+        for(let j=0;j<81;j++){
+            if(isSafe(quest,i,j,quest[i][j])){
+                if(isFullBoard(quest)){
                     return true;
-                } /*else {
-                    if (sudokuCreateBoard(quest)) {
-                        return true;
-                    }
-                }*/
+                }
             }
-        })
-    })
-
+        }
+    }*/
     return isFullBoard(quest);
 }
 
@@ -167,21 +159,18 @@ const solveSudoku = (board) =>{
     let row = null_pos.row;
     let col = null_pos.col;
 
-    number_list.forEach((num, i) => {
-        if (isSafe(board, row, col, num)) {
-            board[row][col] = num;
-
-            if (isFullBoard(board)) {
+    for (let i=0;i<9;i++){
+        if(isSafe(board,row,col,number_list[i])){
+            board[row][col] = number_list[i];
+            if(isFullBoard(board)){
                 return true;
-            } else {
-                if (solveSudoku(board)) {
+            }else{
+                if(solveSudoku(board)){
                     return true;
-                } else board[row][col] = 0;
+                }else board[row][col] = 0;
             }
-
-            
         }
-    });
+    }
     return isFullBoard(board);
 }
 
@@ -272,15 +261,21 @@ const resetSudoku =()=>{
 }
 
 const resetRelatedBg =()=>{
-    cells.forEach(e => e.classList.remove('related'));
+    for(let i=0;i<81;i++){
+        cells[i].classList.remove('related');
+    }
 }
 
 const resetErrored = () => {
-    cells.forEach(e => e.classList.remove('errored'));
+    for(let i=0;i<81;i++){
+        cells[i].classList.remove('errored');
+    }
 }
 
 const resetErrorValue = () =>{
-    cells.forEach(e => e.classList.remove('errValue'));
+    for (let i=0;i<81;i++){
+        cells[i].classList.remove('errValue');
+    }
 }
 
 //Init board into screen
@@ -314,6 +309,18 @@ const initSudoku = ()=>{
 //button submit
 const isGameWin = ()=> sudokuCheck(su_quest);
 document.querySelector('#btn-submit').addEventListener('click', ()=>{
+    for(let i=0;i<81;i++){
+        if(cells[i].classList.contains('errValue')){
+            cells[i].innerHTML="";
+            cells[i].setAttribute('data-value',0);
+            let row = Math.floor(i/9);
+            let col = i%9;
+            su_quest[row][col] = 0;
+        }
+    }
+    resetErrored();
+    resetErrorValue();
+
     document.getElementById("txt-notification").classList.remove('Solved');
     document.getElementById("txt-notification").classList.remove('notSolved');
     if(isGameWin()){
@@ -386,13 +393,6 @@ const solveGame = () =>{
         resetErrorValue();
         resetRelatedBg();
         resetErrored();
-        
-        /*
-        if (su_quest[row][col] !== 0){
-            cells[i].classList.add('filled');
-            cells[i].innerHTML = su_quest[row][col];
-        }*/
-
     }
 }
 document.querySelector('#btn-solve-game').addEventListener('click',()=>{
@@ -448,20 +448,20 @@ const cellRelatedBg = (index) =>{
     }
 }
 const initCellsEvent = () =>{
-    cells.forEach((e,index) => {
-        e.addEventListener('click',()=>{
-            /*console.log("selected index:");
-            console.log(index);*/
-            if(!e.classList.contains('filled')){
-                cells.forEach(e=>e.classList.remove('selected'));
-                selected_cell = index;
-                e.classList.remove('errored');
-                e.classList.add('selected');
+    for (let i=0;i<81;i++){
+        cells[i].addEventListener('click',()=>{
+            if(!cells[i].classList.contains('filled')){
+                for(let j=0;j<81;j++){
+                    cells[j].classList.remove('selected');
+                }
+                selected_cell = i;
+                cells[i].classList.remove('errored');
+                cells[i].classList.add('selected');
                 resetRelatedBg();
-                cellRelatedBg(index);
+                cellRelatedBg(i);
             }
         })
-    })
+    }
 }
 
 const cellCheckError = (value) =>{
@@ -518,9 +518,10 @@ const clearErrorValue = (cell) =>{
     cell.classList.remove('errValue');
 }
 const initNumberInputEvent = () =>{
-    number_inputs.forEach((e,num)=>{
-        e.addEventListener('click',()=>{
-            for(let i=0;i<81;i++) {
+   
+    for (let n=0;n<9;n++){
+        number_inputs[n].addEventListener('click',()=>{
+            for (let i=0;i<81;i++){
                 if(cells[i].classList.contains('errValue')){
                     cells[i].innerHTML ="";
                     cells[i].setAttribute('data-value',0);
@@ -529,21 +530,21 @@ const initNumberInputEvent = () =>{
                     su_quest[row][col] = 0;
                     cells[i].classList.remove('errValue');
                 }
-            };
+            }
             if(cells[selected_cell].classList.contains('errValue')){
                 clearErrorValue(cells[selected_cell]);
             }
             if(!cells[selected_cell].classList.contains('filled')){
-                cells[selected_cell].innerHTML = num + 1;
-                cells[selected_cell].setAttribute('data-value',num+1);
-                let row = Math.floor(selected_cell/9);
+                cells[selected_cell].innerHTML =n + 1;
+                cells[selected_cell].setAttribute('data-value',n+1);
+                let row=Math.floor(selected_cell/9);
                 let col = selected_cell%9;
-                su_quest[row][col] = num +1;
+                su_quest[row][col] = n +1;
                 resetErrored();
-                cellCheckError(num+1);
+                cellCheckError(n+1);
             }
         })
-    })
+    }
 }
 //button delete value (X)
 document.querySelector('#btn-delete').addEventListener('click',()=>{
@@ -607,22 +608,26 @@ const initGameBoardSolve = () =>{
     }
 }
 const initCellsEventSolve = () =>{
-    cellsSolve.forEach((e,index) => {
-        e.addEventListener('click',()=>{
-            /*console.log("selected index:");
-            console.log(index);*/
-            cellsSolve.forEach(e=>e.classList.remove('selected'));
-            selected_cell = index;
-            e.classList.add('selected');
-            
+    
+    for (let i=0;i<81;i++){
+        cellsSolve[i].addEventListener('click',()=>{
+            for(let j=0;j<81;j++){
+                cellsSolve[j].classList.remove('selected');
+            }
+            selected_cell = i;
+            cellsSolve[i].classList.add('selected');
         })
-    })
+    }
 }
 const resetErroredSolve =()=>{
-    cellsSolve.forEach(e => e.classList.remove('errored'));
+    for(let i=0;i<81;i++){
+        cellsSolve[i].classList.remove('errored');
+    }
 }
 const resetErrorValueSolve = () =>{
-    cellsSolve.forEach(e => e.classList.remove('errValue'));
+    for(let i=0;i<81;i++){
+        cellsSolve[i].classList.remove('errValue');
+    }
 }
 const cellCheckErrorSolve = (value) =>{
     const addErrValue = (cell) =>{
@@ -675,9 +680,10 @@ const cellCheckErrorSolve = (value) =>{
     }
 }
 const initNumberInputEventSolve = () =>{
-    number_inputsSolve.forEach((e,num)=>{
-        e.addEventListener('click',()=>{
-            for(let i=0;i<81;i++) {
+    
+    for(let n=0;n<9;n++){
+        number_inputsSolve[n].addEventListener('click',()=>{
+            for(let i=0;i<81;i++){
                 if(cellsSolve[i].classList.contains('errValue')){
                     cellsSolve[i].innerHTML ="";
                     cellsSolve[i].setAttribute('data-value',0);
@@ -687,21 +693,22 @@ const initNumberInputEventSolve = () =>{
                     cellsSolve[i].classList.remove('filled');
                     cellsSolve[i].classList.remove('errValue');
                 }
-            };
+            }
+
             if(cellsSolve[selected_cell].classList.contains('errValue')){
                 clearErrorValue(cellsSolve[selected_cell]);
             }
 
-            cellsSolve[selected_cell].innerHTML = num + 1;
-            cellsSolve[selected_cell].setAttribute('data-value',num+1);
+            cellsSolve[selected_cell].innerHTML = n + 1;
+            cellsSolve[selected_cell].setAttribute('data-value',n+1);
             cellsSolve[selected_cell].classList.add('filled');
             let row = Math.floor(selected_cell/9);
             let col = selected_cell%9;
-            su_solve[row][col] = num +1;
+            su_solve[row][col] = n +1;
             resetErroredSolve();
-            cellCheckErrorSolve(num+1);
+            cellCheckErrorSolve(n+1);
         })
-    })
+    }
 }
 //button delete value (X)
 document.querySelector('#btn-delete-solve').addEventListener('click',()=>{
