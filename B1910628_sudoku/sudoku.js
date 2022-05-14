@@ -207,6 +207,7 @@ document.querySelector('#btn-choose-level').addEventListener('click', (e) => {
 //button start game
 const startGame =()=>{
     start_screen.classList.remove('active');
+    solve_screen.classList.remove('active');
     game_screen.classList.add('active');
     game_level.innerHTML=CONSTANT.LEVEL_NAME[level_index];
 }
@@ -219,6 +220,7 @@ document.querySelector('#btn-start-game').addEventListener('click',()=>{
 const solveScreen = () =>{
     start_screen.classList.remove('active');
     solve_screen.classList.add('active');
+    game_screen.classList.remove('active');
 }
 document.querySelector('#btn-solve-sudoku').addEventListener('click',()=>{
     solveScreen();
@@ -232,7 +234,7 @@ document.querySelector('#btn-solve-sudoku').addEventListener('click',()=>{
         cellsSolve[i].classList.remove('selected');
         cellsSolve[i].innerHTML="";
     }
-    resetErrorSolve();
+    resetErroredSolve();
     numInput = 0;
 })
 
@@ -263,17 +265,18 @@ const initGameBoard = () =>{
 const resetSudoku =()=>{
     for(let i=0;i<81 ;i++){
         cells[i].innerHTML ='';
+        cells[i].setAttribute('data-value',0);
         cells[i].classList.remove('filled');
         cells[i].classList.remove('selected');
     }
 }
 
-const resetHoverBg =()=>{
-    cells.forEach(e => e.classList.remove('hover'));
+const resetRelatedBg =()=>{
+    cells.forEach(e => e.classList.remove('related'));
 }
 
-const resetError = () => {
-    cells.forEach(e => e.classList.remove('err'));
+const resetErrored = () => {
+    cells.forEach(e => e.classList.remove('errored'));
 }
 
 const resetErrorValue = () =>{
@@ -285,18 +288,18 @@ const initSudoku = ()=>{
     //clear old sudoku
     resetSudoku();
     resetErrorValue();
-    resetHoverBg();
-    resetError();
+    resetRelatedBg();
+    resetErrored();
     let board = newBoard();
     let quest = newBoard();
     sudokuCreateBoard(board);
     sudokuCreateQuest(board,level,quest);
     su_quest = quest;
     su_answer = board;
-/*
-    console.table(su_quest);
-    console.table(su_answer);
-*/
+
+    //console.table(su_quest);
+    //console.table(su_answer);
+
     for (let i=0;i<81;i++){
         let row = Math.floor(i/9);
         let col = i%9;
@@ -338,6 +341,11 @@ const returnStartScreen =()=>{
     start_screen.classList.add('active');
     game_screen.classList.remove('active');
     solve_screen.classList.remove('active');
+    resetErrored();
+    resetErroredSolve();
+    resetErrorValue();
+    resetErrorValueSolve();
+    resetRelatedBg();
     /*pause_screen.classList.remove('active');
     result_screen.classList.remove('active');*/
 }
@@ -364,8 +372,8 @@ const clearNotFill =()=>{
 document.querySelector('#btn-clear').addEventListener('click',()=>{
     clearNotFill();
     resetErrorValue();
-    resetHoverBg();
-    resetError();
+    resetRelatedBg();
+    resetErrored();
 })
 
 //button solve game
@@ -376,8 +384,8 @@ const solveGame = () =>{
         cells[i].setAttribute('data-value',su_answer[row][col]);
         cells[i].innerHTML = su_answer[row][col];
         resetErrorValue();
-        resetHoverBg();
-        resetError();
+        resetRelatedBg();
+        resetErrored();
         
         /*
         if (su_quest[row][col] !== 0){
@@ -391,18 +399,18 @@ document.querySelector('#btn-solve-game').addEventListener('click',()=>{
     solveGame();
 })
 
-const cellHoverBg = (index) =>{
+const cellRelatedBg = (index) =>{
     let row=Math.floor(index/9);
     let col = index%9;
 
     let box_start_row = row - row%3;
     let box_start_col = col - col%3;
-    //hover 3x3 cells
+    //related 3x3 cells
     //console.log("index box: ");
     for(let i=0;i<3;i++){
         for(let j=0;j<3;j++){
             let cell = cells[9*(box_start_row+i) + (box_start_col +j)];
-            cell.classList.add('hover');
+            cell.classList.add('related');
             //console.log(9*(box_start_row+i) + (box_start_col +j));
         }
     }
@@ -410,7 +418,7 @@ const cellHoverBg = (index) =>{
     let step = 9;
     //console.log("index above index: ");
     while (index - step >=0) {
-        cells[index - step].classList.add('hover');
+        cells[index - step].classList.add('related');
         //console.log(index - step);
         step += 9;
     }
@@ -418,7 +426,7 @@ const cellHoverBg = (index) =>{
     step = 9;
     //console.log("index below index: ");
     while (index + step < 81) {
-        cells[index + step].classList.add('hover');
+        cells[index + step].classList.add('related');
         //console.log(index + step);
         step += 9;
     }
@@ -426,7 +434,7 @@ const cellHoverBg = (index) =>{
     step =1;
     //console.log("index left index: ");
     while (index - step >=9*row) {
-        cells[index - step].classList.add('hover');
+        cells[index - step].classList.add('related');
         //console.log(index - step);
         step += 1;
     }
@@ -434,7 +442,7 @@ const cellHoverBg = (index) =>{
     step =1;
     //console.log("index right index: ");
     while (index + step < 9*row + 9) {
-        cells[index + step].classList.add('hover');
+        cells[index + step].classList.add('related');
         //console.log(index + step);
         step += 1;
     }
@@ -447,10 +455,10 @@ const initCellsEvent = () =>{
             if(!e.classList.contains('filled')){
                 cells.forEach(e=>e.classList.remove('selected'));
                 selected_cell = index;
-                e.classList.remove('err');
+                e.classList.remove('errored');
                 e.classList.add('selected');
-                resetHoverBg();
-                cellHoverBg(index);
+                resetRelatedBg();
+                cellRelatedBg(index);
             }
         })
     })
@@ -462,7 +470,7 @@ const cellCheckError = (value) =>{
     }
     const addError = (cell) =>{
         if(parseInt(cell.getAttribute('data-value')) === value){
-            cell.classList.add('err');
+            cell.classList.add('errored');
             addErrValue(cells[selected_cell]);
         }
     }
@@ -531,7 +539,7 @@ const initNumberInputEvent = () =>{
                 let row = Math.floor(selected_cell/9);
                 let col = selected_cell%9;
                 su_quest[row][col] = num +1;
-                resetError();
+                resetErrored();
                 cellCheckError(num+1);
             }
         })
@@ -564,11 +572,11 @@ document.querySelector('#btn-home').addEventListener('click',()=>{
         cellsSolve[i].setAttribute('data-value',su_solve[row][col]);
         cellsSolve[i].classList.remove('filled');
         cellsSolve[i].classList.remove('selected');
-        cellsSolve[i].classList.remove('err');
+        cellsSolve[i].classList.remove('errored');
         cellsSolve[i].classList.remove('errValue');
         cellsSolve[i].innerHTML="";
     }
-    resetErrorSolve();
+    resetErroredSolve();
     resetErrorValueSolve();
 })
 //button clear all
@@ -580,11 +588,11 @@ document.querySelector('#btn-clear-solve').addEventListener('click',()=>{
         cellsSolve[i].setAttribute('data-value',su_solve[row][col]);
         cellsSolve[i].classList.remove('filled');
         cellsSolve[i].classList.remove('selected');
-        cellsSolve[i].classList.remove('err');
+        cellsSolve[i].classList.remove('errored');
         cellsSolve[i].classList.remove('errValue');
         cellsSolve[i].innerHTML="";
     }
-    resetErrorSolve();
+    resetErroredSolve();
     resetErrorValueSolve();
 })
 //init box
@@ -610,8 +618,8 @@ const initCellsEventSolve = () =>{
         })
     })
 }
-const resetErrorSolve =()=>{
-    cellsSolve.forEach(e => e.classList.remove('err'));
+const resetErroredSolve =()=>{
+    cellsSolve.forEach(e => e.classList.remove('errored'));
 }
 const resetErrorValueSolve = () =>{
     cellsSolve.forEach(e => e.classList.remove('errValue'));
@@ -622,7 +630,7 @@ const cellCheckErrorSolve = (value) =>{
     }
     const addError = (cell) =>{
         if(parseInt(cell.getAttribute('data-value')) === value){
-            cell.classList.add('err');
+            cell.classList.add('errored');
             addErrValue(cellsSolve[selected_cell]);
         }
     }
@@ -690,7 +698,7 @@ const initNumberInputEventSolve = () =>{
             let row = Math.floor(selected_cell/9);
             let col = selected_cell%9;
             su_solve[row][col] = num +1;
-            resetErrorSolve();
+            resetErroredSolve();
             cellCheckErrorSolve(num+1);
         })
     })
@@ -703,11 +711,11 @@ document.querySelector('#btn-delete-solve').addEventListener('click',()=>{
     let row = Math.floor(selected_cell/9);
     let col = selected_cell%9;
     su_solve[row][col] = 0;
-    resetErrorSolve();
+    resetErroredSolve();
 })
 //button solve board
 const solveSudokuBoard = () =>{
-    resetErrorSolve();
+    resetErroredSolve();
     for(let i=0;i<81;i++) {
         if(cellsSolve[i].classList.contains('errValue')){
             cellsSolve[i].innerHTML ="";
@@ -759,50 +767,54 @@ const initNumberEvent = () =>{
             numInput = parseInt(String.fromCharCode(event.keyCode));
         else if (event.keyCode == 120 || event.keyCode == 88)
             numInput = "";
+            
     if (numInput !== 0){
         for(let i=0;i<81;i++) {
-            if(cells[i].classList.contains('errValue')){
-                cells[i].innerHTML ="";
-                cells[i].setAttribute('data-value',0);
-                let row = Math.floor(i/9);
-                let col = i%9;
-                su_quest[row][col] = 0;
-                cells[i].classList.remove('errValue');
+            if(game_screen.classList.contains('active')){
+                if(cells[i].classList.contains('errValue')){
+                    cells[i].innerHTML ="";
+                    cells[i].setAttribute('data-value',0);
+                    let row = Math.floor(i/9);
+                    let col = i%9;
+                    su_quest[row][col] = 0;
+                    cells[i].classList.remove('errValue');
+                }
+                if(cells[selected_cell].classList.contains('errValue')){
+                    clearErrorValue(cells[selected_cell]);
+                }
+                if(!cells[selected_cell].classList.contains('filled')){
+                    cells[selected_cell].innerHTML = numInput;
+                    cells[selected_cell].setAttribute('data-value',numInput);
+                    let row = Math.floor(selected_cell/9);
+                    let col = selected_cell%9;
+                    su_quest[row][col] = numInput;
+                    resetErrored();
+                    cellCheckError(numInput);
+                }
             }
-            if(cellsSolve[i].classList.contains('errValue')){
-                cellsSolve[i].innerHTML ="";
-                cellsSolve[i].setAttribute('data-value',0);
-                let row = Math.floor(i/9);
-                let col = i%9;
-                su_solve[row][col] = 0;
-                cellsSolve[i].classList.remove('filled');
-                cellsSolve[i].classList.remove('errValue');
+
+            if(solve_screen.classList.contains('active')){
+                if(cellsSolve[i].classList.contains('errValue')){
+                    cellsSolve[i].innerHTML ="";
+                    cellsSolve[i].setAttribute('data-value',0);
+                    let row = Math.floor(i/9);
+                    let col = i%9;
+                    su_solve[row][col] = 0;
+                    cellsSolve[i].classList.remove('filled');
+                    cellsSolve[i].classList.remove('errValue');
+                }
+                if(cellsSolve[selected_cell].classList.contains('errValue')){
+                    clearErrorValue(cellsSolve[selected_cell]);
+                }
+                cellsSolve[selected_cell].innerHTML = numInput;
+                cellsSolve[selected_cell].setAttribute('data-value',numInput);
+                cellsSolve[selected_cell].classList.add('filled');
+                let row = Math.floor(selected_cell/9);
+                let col = selected_cell%9;
+                su_solve[row][col] = numInput;
+                resetErroredSolve();
+                cellCheckErrorSolve(numInput);
             }
         }
-    
-        if(cells[selected_cell].classList.contains('errValue')){
-            clearErrorValue(cells[selected_cell]);
-        }
-        if(cellsSolve[selected_cell].classList.contains('errValue')){
-            clearErrorValue(cellsSolve[selected_cell]);
-        }
-    
-        if(!cells[selected_cell].classList.contains('filled')){
-            cells[selected_cell].innerHTML = numInput;
-            cells[selected_cell].setAttribute('data-value',numInput);
-            let row = Math.floor(selected_cell/9);
-            let col = selected_cell%9;
-            su_quest[row][col] = numInput;
-            resetError();
-            cellCheckError(numInput);
-        }
-        cellsSolve[selected_cell].innerHTML = numInput;
-        cellsSolve[selected_cell].setAttribute('data-value',numInput);
-        cellsSolve[selected_cell].classList.add('filled');
-        let row = Math.floor(selected_cell/9);
-        let col = selected_cell%9;
-        su_solve[row][col] = numInput;
-        resetErrorSolve();
-        cellCheckErrorSolve(numInput);
     }
 }

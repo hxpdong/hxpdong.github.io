@@ -119,10 +119,10 @@ body{
 .sudoku-cell.selected,.sudoku-cell-solve.selected {
     background-color: rgb(134, 203, 212);
 }
-.sudoku-cell.hover{
+.sudoku-cell.related{
     border-color: blue;
 }
-.sudoku-cell.err,.sudoku-cell-solve.err {
+.sudoku-cell.errored,.sudoku-cell-solve.errored {
     background-color: rgb(219, 108, 108);
     color: white;
 }
