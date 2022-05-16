@@ -353,8 +353,7 @@ const returnStartScreen =()=>{
     resetErrorValue();
     resetErrorValueSolve();
     resetRelatedBg();
-    /*pause_screen.classList.remove('active');
-    result_screen.classList.remove('active');*/
+    
 }
 document.querySelector("#btn-new-game").addEventListener('click', ()=>{
     returnStartScreen();
@@ -414,37 +413,17 @@ const cellRelatedBg = (index) =>{
             //console.log(9*(box_start_row+i) + (box_start_col +j));
         }
     }
-    //hover above cells (column)
-    let step = 9;
-    //console.log("index above index: ");
-    while (index - step >=0) {
-        cells[index - step].classList.add('related');
-        //console.log(index - step);
-        step += 9;
+    //related row
+    for(let j=0;j<9;j++){
+        if((row*9 + j)!==index){
+            cells[row*9 +j].classList.add('related');
+        }
     }
-    //hover below cells (column)
-    step = 9;
-    //console.log("index below index: ");
-    while (index + step < 81) {
-        cells[index + step].classList.add('related');
-        //console.log(index + step);
-        step += 9;
-    }
-    //hover left cells (row)
-    step =1;
-    //console.log("index left index: ");
-    while (index - step >=9*row) {
-        cells[index - step].classList.add('related');
-        //console.log(index - step);
-        step += 1;
-    }
-    //hover right cells (row)
-    step =1;
-    //console.log("index right index: ");
-    while (index + step < 9*row + 9) {
-        cells[index + step].classList.add('related');
-        //console.log(index + step);
-        step += 1;
+    //related col
+    for(let i=0;i<9;i++){
+        if((i*9 + col) !== index){
+            cells[i*9 + col].classList.add('related');
+        }
     }
 }
 const initCellsEvent = () =>{
@@ -489,29 +468,17 @@ const cellCheckError = (value) =>{
            
         }
     }
-    //check above cells
-    let step = 9;
-    while (index - step >=0) {
-        addError(cells[index - step]);
-        step += 9;
+   //related row
+    for(let j=0;j<9;j++){
+        if((row*9 + j)!==index){
+            addError(cells[row*9 +j]);
+        }
     }
-   //check below cells
-    step = 9;
-    while (index + step < 81) {
-        addError(cells[index + step]);
-        step += 9;
-    }
-    //check left cells
-    step =1;
-    while (index - step >=9*row) {
-        addError(cells[index - step]);
-        step += 1;
-    }
-    //check right cells
-    step =1;
-    while (index + step < 9*row + 9) {
-        addError(cells[index + step]);
-        step += 1;
+    //related col
+    for(let i=0;i<9;i++){
+        if((i*9 + col) !== index){
+            addError(cells[i*9 + col]);
+        }
     }
 }
 const clearErrorValue = (cell) =>{
@@ -654,29 +621,18 @@ const cellCheckErrorSolve = (value) =>{
            
         }
     }
-    //check above cells
-    let step = 9;
-    while (index - step >=0) {
-        addError(cellsSolve[index - step]);
-        step += 9;
+    
+    //related row
+    for(let j=0;j<9;j++){
+        if((row*9 + j)!==index){
+            addError(cellsSolve[row*9 +j]);
+        }
     }
-   //check below cells
-    step = 9;
-    while (index + step < 81) {
-        addError(cellsSolve[index + step]);
-        step += 9;
-    }
-    //check left cells
-    step =1;
-    while (index - step >=9*row) {
-        addError(cellsSolve[index - step]);
-        step += 1;
-    }
-    //check right cells
-    step =1;
-    while (index + step < 9*row + 9) {
-        addError(cellsSolve[index + step]);
-        step += 1;
+    //related col
+    for(let i=0;i<9;i++){
+        if((i*9 + col) !== index){
+            addError(cellsSolve[i*9 + col]);
+        }
     }
 }
 const initNumberInputEventSolve = () =>{
