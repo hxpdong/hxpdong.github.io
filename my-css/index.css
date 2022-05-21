@@ -1,10 +1,10 @@
 body{
-    background-color: lightblue;
+    background-color: 	#549bd5;
 }
 .header {
     width:auto;
     height:auto;
-    background-color: lightblue;
+    background-color: 	#549bd5;
     color:white;
     font-size: 35px;
     font-weight: bold;
@@ -102,7 +102,7 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: lightblue;
+    background-color: #549bd5;
 }
 .txt-quote{
     font-style: italic;
