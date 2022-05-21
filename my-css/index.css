@@ -14,15 +14,15 @@ body{
     justify-content: center;
     padding-top:30px;
     font-family:'Courier New', Courier, monospace;
-    text-shadow: 1px 1px 5px black;
+    
 }
 
 .title{
-
+    text-shadow: 2px 2px 3px black;
 }
 .sub-title{
     padding-top: 10px;
-    font-size: 15px;
+    font-size: 17px;
 }
 .links{
     padding:10px;
