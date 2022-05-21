@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(92, 203, 203);
+}
 .header {
     width:auto;
     height:auto;
@@ -37,7 +40,7 @@
     font-size: 17px;
     padding:10px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+    background-color: white;
 }
 a {
     text-decoration: none;
