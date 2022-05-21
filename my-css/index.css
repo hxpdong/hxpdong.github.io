@@ -60,3 +60,35 @@ a {
     padding:10px;
     font-family:'Courier New', Courier, monospace;
 }
+.navigation{
+    width:auto;
+    height:auto;
+    background-color: rgb(167, 179, 179);
+    color:white;
+    font-size: 19px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding:10px;
+    font-family:'Courier New', Courier, monospace;
+}
+.navigation .part{
+    margin-left:30px;
+    margin-right: 30px;
+}
+
+#top-up {
+    font-size: 3rem;
+    cursor: pointer;
+    position: fixed;
+    z-index: 9999;
+    color:#004993;
+    bottom: 20px;
+    right: 15px;
+    display: none;
+}
+#top-up:hover {
+    color: #333
+}

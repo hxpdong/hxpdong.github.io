@@ -21,9 +21,15 @@
             <a class="icon-link" href="https://github.com/hxpdong"><i class="fa fa-github"></i></a>
         </div>
     </div>
+    <div class="navigation">
+        <a class="icon-link" href="#aboutme"><li class="part">About Me</li></a>
+        <a class="icon-link" href="#material"><li class="part">Material</li></a>
+        <a class="icon-link" href="#record"><li class="part">Record</li></a>
+        <a class="icon-link" href="#project"><li class="part">Project</li></a>
+    </div>
     <div class="main">
 
-        <div class="aboutMe">
+        <div class="aboutMe" id="aboutme">
             <b>About me</b><br>
             <p>&emsp;&emsp;Hi, my name is Dong, you can call me by Easton.<br>
                 &emsp;&emsp;I am a junior at Can Tho University, majoring is Information Technology. <br>
@@ -32,7 +38,7 @@
         </div>
         <hr>
 
-        <div class="Subject_list">
+        <div class="Subject_list" id="material">
             <b>Study materials about Information Technology major</b><br>(what I stored when studying process)
             <ul>
                 Year 1
@@ -75,7 +81,7 @@
         </div>
         <hr>
 
-        <div class="Record">
+        <div class="Record" id="record">
             <b>Record</b><br>(just for studying)
             <br>
             <ul>
@@ -85,7 +91,7 @@
         </div>
         <hr>
 
-        <div class="project">
+        <div class="project" id="project">
             <b>Project</b><br>(group exercises, projects, ... in the studying process)
             <ul>
                 <li>
@@ -115,6 +121,32 @@
         <div>------------------</div>
         <div class="sub-title">@Designed by Ho Xuan Phuong Dong</div>
         <div class="sub-title">@Last updated: May 21, 2022</div>
+    </div>
+
+    <div class="topup">
+        <!-- import icon font awesome -->
+        
+        <!-- Import thư viện JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        // kéo xuống khoảng cách 500px thì xuất hiện nút Top-up
+            var offset = 0;
+            // thời gian di trượt 0.75s ( 1000 = 1s )
+            var duration = 250;
+            $(function(){
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > offset)
+                    $('#top-up').fadeIn(duration);else
+                    $('#top-up').fadeOut(duration);
+                });
+                $('#top-up').click(function () {
+                    $('body,html').animate({scrollTop: 0}, duration);
+                });
+            });
+        </script>
+        <div title="Turn to top" id="top-up">
+            <i class="fa fa-arrow-circle-up"></i>
+        </div>
     </div>
 
 </body>
