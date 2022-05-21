@@ -1,10 +1,10 @@
 body{
-    background-color: rgb(92, 203, 203);
+    background-color: lightblue;
 }
 .header {
     width:auto;
     height:auto;
-    background-color: rgb(92, 203, 203);
+    background-color: lightblue;
     color:white;
     font-size: 35px;
     font-weight: bold;
@@ -14,6 +14,7 @@ body{
     justify-content: center;
     padding-top:30px;
     font-family:'Courier New', Courier, monospace;
+    text-shadow: 1px 1px 5px black;
 }
 
 .title{
@@ -94,4 +95,21 @@ a {
 }
 #top-up:hover {
     color: #333
+}
+
+.quote {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+}
+.txt-quote{
+    font-style: italic;
+    padding:10px;
+    color:white;
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:17px;
+    text-shadow: 5px 2px 4px grey;
 }
