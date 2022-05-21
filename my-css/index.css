@@ -24,10 +24,10 @@
     padding:10px;
     font-size: 20px;
 }
-.links a:visited {
+.links a:visited, .contact a:visited {
     color:white;
 }
-.links a:active{
+.links a:active, .contact a:active {
     color:white;
 }
 
