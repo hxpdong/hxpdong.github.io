@@ -130,7 +130,17 @@
         <img class="img-icon" src="title-icon-rmbg.png">
         <div>Easton</div>
         <div>@Designed by <a class="icon-link" href="https://www.facebook.com/hxpdong.01" target="_blank">Ho Xuan Phuong Dong</a></div>
-        <div>@Last updated: May 24, 2022</div>
+        <div>
+            @Last updated: 
+            <script>
+                var date = new Date(document.lastModified);
+                var d = date.getDate();
+                //var m = date.getMonth()+1;
+                var M = date.toLocaleString('en-US',{month:'long',});
+                var y = date.getFullYear();
+                document.write(M + " " + d +", " + y);
+            </script>
+        </div>
     </div>
 
     <div class="topup">
