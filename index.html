@@ -136,9 +136,9 @@
                 var date = new Date(document.lastModified);
                 var d = date.getDate();
                 //var m = date.getMonth()+1;
-                var M = date.toLocaleString('en-US',{month:'long',});
+                var M = date.toLocaleString('en-US',{month:'short',});
                 var y = date.getFullYear();
-                document.write(M + " " + d +", " + y);
+                document.write(d + " " + M +" " + y);
             </script>
         </div>
     </div>
