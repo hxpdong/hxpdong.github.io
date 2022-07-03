@@ -121,3 +121,10 @@ a {
 .txt-big {
     font-size: 30px;
 }
+
+a#top-up-icon:visited {
+    color:#333;
+}
+a#top-up-icon:link {
+    color:#333;
+}
