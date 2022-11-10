@@ -1,5 +1,8 @@
 body{
-    background-color: 	#549bd5;
+    background-color: 	#969db3;
+    max-width: 900px;
+    margin: auto;
+    padding:20px;
 }
 .header {
     width:auto;
