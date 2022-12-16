@@ -1,0 +1,22 @@
+html,body{
+  margin:0;
+  height:100%;
+}
+img{
+display:block;
+width:100%; 
+height:100%;
+object-fit: cover;
+border: 1px solid #f00;
+}
+
+.bg{
+  position: relative;
+  z-index: 2;
+}
+.bt{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
