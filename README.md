@@ -1,3 +1,3 @@
 # hxpdong.github.io
-My personal page
+My personal page\n
 Using HTML, CSS, JavaScript
